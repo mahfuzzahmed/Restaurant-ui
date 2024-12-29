@@ -3,31 +3,31 @@ import MenuItem from "../Shared/MenuItem";
 import SectionTitle from "../../Components/SectionTitle";
 
 const PopularItem = () => {
-    const [menu , setMenu] = useState([])
-    useEffect(()=>{
+    const [menu, setMenu] = useState([])
+    useEffect(() => {
         fetch("menu.json")
-        .then(res => res.json())
-        .then(data => {
-            const popularItem = data.filter(item => item.category === "popular")
-            setMenu(popularItem)
-        })
-    },[])
+            .then(res => res.json())
+            .then(data => {
+                const popularItem = data.filter(item => item.category === "popular")
+                setMenu(popularItem)
+            })
+    }, [])
     return (
-        <div>
+        <div className="mb-10">
             <SectionTitle
-            heading={"From Our Menu"}
-            subheading={"Popular Item"}>
+                heading={"From Our Menu"}
+                subheading={"Popular Item"}>
 
             </SectionTitle>
-           <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-10">
                 {
-                    menu.map(item => <MenuItem 
-                    key={item._id}
-                    item={item}>
-    
-                    </MenuItem> )
+                    menu.map(item => <MenuItem
+                        key={item._id}
+                        item={item}>
+
+                    </MenuItem>)
                 }
-           </div>
+            </div>
         </div>
     );
 };
