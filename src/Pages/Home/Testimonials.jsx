@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css'
+import { FaQuoteLeft } from 'react-icons/fa';
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([])
@@ -46,7 +47,8 @@ const Testimonials = () => {
                                     value={review.rating}
                                     readOnly
                                 />
-                                <p>{review.details}</p>
+                                <FaQuoteLeft className='text-7xl' />
+                                <p className='w-[880px]'>{review.details}</p>
                                 <h3 className='text-xl text-orange-500'>{review.name}</h3>
                             </div>
 
