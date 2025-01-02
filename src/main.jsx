@@ -11,6 +11,7 @@ import {
 import MainLayout from './Layout/MainLayout.jsx'
 import Home from './Pages/Home/Home.jsx'
 import Menu from './Pages/Home/menu/Menu.jsx';
+import Order from './Pages/order/order/Order.jsx';
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/menu',
         element: <Menu></Menu>
+      },
+      {
+        path: '/order/:category',
+        element: <Order></Order>
       },
     ]
   },
