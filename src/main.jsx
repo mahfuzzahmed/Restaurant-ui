@@ -12,6 +12,9 @@ import MainLayout from './Layout/MainLayout.jsx'
 import Home from './Pages/Home/Home.jsx'
 import Menu from './Pages/Home/menu/Menu.jsx';
 import Order from './Pages/order/order/Order.jsx';
+import AuthProvider from './Providers/AuthProvider.jsx';
+import Login from './Pages/Login/Login.jsx';
+import SignUp from './Pages/SignUp/SignUp.jsx';
 
 
 const router = createBrowserRouter([
@@ -31,16 +34,27 @@ const router = createBrowserRouter([
         path: '/order/:category',
         element: <Order></Order>
       },
+      {
+        path: 'login',
+        element: <Login></Login>
+      },
+      {
+        path: 'signup',
+        element: <SignUp></SignUp>
+      },
     ]
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+
+    <AuthProvider>
     <HelmetProvider>
       <div className='max-w-screen-xl mx-auto'>
         <RouterProvider router={router} />
       </div>
     </HelmetProvider>
+    </AuthProvider>
   </StrictMode>,
 )
