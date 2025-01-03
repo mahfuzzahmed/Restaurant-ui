@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useCart from "../hooks/useCart";
 
 
 const FoodCard = ({ item }) => {
@@ -9,6 +10,7 @@ const FoodCard = ({ item }) => {
     const { user } = useAuth()
     const navigate = useNavigate()
     const { image, name, price, recipe, _id } = item
+    const [, refetch]=useCart()
 
 const axiosSecure = useAxiosSecure()
 
@@ -34,6 +36,7 @@ const axiosSecure = useAxiosSecure()
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        refetch()
                     }
                 })
 

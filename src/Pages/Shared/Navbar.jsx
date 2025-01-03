@@ -2,34 +2,38 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart()
     const handleLogOut = () => {
         logOut()
             .then(() => { })
             .catch(error => console.log(error));
     }
     const links = <>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/menu">Menu</Link></li>
-        <li><Link to="/order/salad">Order Food</Link></li>
-        <li>
-            <Link>
-                <button className="btn">
-                <FaCartShopping />
-                    <div className="badge badge-secondary">+0</div>
-                </button>
-            </Link>
-        </li>
-        {
-            user ? <>
-                <span>{user?.displayName}</span>
-                <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
-            </> : <>
-                <li><Link to="/login">Login</Link></li>
-            </>
-        }
+        <div className="flex items-center">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/menu">Menu</Link></li>
+            <li><Link to="/order/salad">Order Food</Link></li>
+            <li>
+                <Link>
+                    <button className="btn">
+                    <FaCartShopping />
+                        <div className="badge badge-secondary">+{cart.length}</div>
+                    </button>
+                </Link>
+            </li>
+            {
+                user ? <>
+                    <span>{user?.displayName}</span>
+                    <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
+                </> : <>
+                    <li><Link to="/login">Login</Link></li>
+                </>
+            }
+        </div>
     </>
 
     return (
