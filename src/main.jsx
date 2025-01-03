@@ -21,6 +21,8 @@ import Order from './Pages/order/order/Order.jsx';
 import AuthProvider from './Providers/AuthProvider.jsx';
 import Login from './Pages/Login/Login.jsx';
 import SignUp from './Pages/SignUp/SignUp.jsx';
+import Dashboard from './Layout/Dashboard.jsx';
+import Cart from './Pages/Dashboard/Cart/Cart.jsx';
 
 
 const router = createBrowserRouter([
@@ -50,6 +52,16 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: '/dashboard',
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: 'cart',
+        element: <Cart></Cart>
+      }
+    ]
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
