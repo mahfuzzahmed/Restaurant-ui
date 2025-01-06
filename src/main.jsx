@@ -23,6 +23,7 @@ import Login from './Pages/Login/Login.jsx';
 import SignUp from './Pages/SignUp/SignUp.jsx';
 import Dashboard from './Layout/Dashboard.jsx';
 import Cart from './Pages/Dashboard/Cart/Cart.jsx';
+import AllUsers from './Pages/Dashboard/AllUsers/AllUsers.jsx';
 
 
 const router = createBrowserRouter([
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart></Cart>
-      }
+      },
+      {
+        path: 'users',
+        element: <AllUsers></AllUsers>
+      },
     ]
   }
 ]);

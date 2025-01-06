@@ -1,11 +1,14 @@
 import { FaAd, FaCalendar, FaHome, FaList, FaSearch, FaShoppingCart } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
-import { FaEnvelope } from "react-icons/fa6";
+import { FaBook, FaEnvelope, FaUsers, FaUtensils } from "react-icons/fa6";
+import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
     const [cart] = useCart();
+    // const [isAdmin] = useAdmin();
+    // console.log(isAdmin)
     const isAdmin = true
 
     return (
