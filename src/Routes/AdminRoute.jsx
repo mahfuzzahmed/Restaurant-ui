@@ -4,15 +4,16 @@ import { Navigate, useLocation } from 'react-router-dom';
 import useAdmin from '../hooks/useAdmin';
 
 const AdminRoute = ({ children }) => {
-    const { isAdmin, isAdminLoading } = useAdmin()
+    const [isAdmin, isAdminLoading] = useAdmin()
     const location = useLocation()
     const { user, loading } = useAuth()
 
 
-    if (loading || isAdmin) {
+    if (loading || isAdminLoading) {
         return <progress className="progress w-56"></progress>
     }
-    if (user && isAdminLoading) {
+    // console.log(isAdmin,"from private admin", user)
+    if (user && isAdmin) {
         return children
     }
     return <Navigate to={'/'} state={{ from: location }} replace ></Navigate>

@@ -8,7 +8,7 @@ import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
     const [cart] = useCart();
     const [isAdmin] = useAdmin();
-    console.log(isAdmin)
+    // console.log(isAdmin)
     // const isAdmin = true
 
     return (
