@@ -28,6 +28,7 @@ import AddItems from './Pages/Dashboard/AddItems/AddItems.jsx';
 import AdminRoute from './Routes/AdminRoute.jsx';
 import ManageItems from './Pages/Dashboard/ManageItem/ManageItems.jsx';
 import UpdateItem from './Pages/Dashboard/UpdataItems/UpdateItem.jsx';
+import Payment from './Pages/Dashboard/Payment/Payment.jsx';
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart></Cart>
+      },
+      {
+        path: 'payment',
+        element: <Payment></Payment>
       },
 
       // admin only routes
