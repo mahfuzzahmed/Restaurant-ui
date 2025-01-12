@@ -3,11 +3,16 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useCart from '../../../hooks/useCart';
 import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = () => {
+    
+    const navigate = useNavigate()
+    
     const [error, setError] = useState('')
     const [clientSecret, setClientSecret] = useState('')
-    const [transactionId , setTransactionId] = useState('')
+    const [transactionId, setTransactionId] = useState('')
     const stripe = useStripe()
     const elements = useElements()
 
@@ -73,10 +78,40 @@ const CheckoutForm = () => {
             console.log('confirm error')
         }
         else {
+
             console.log('payment intent', paymentIntent)
-            if(paymentIntent.status === 'succeeded'){
-                console.log('transaction id',  paymentIntent.id)
+
+            if (paymentIntent.status === 'succeeded') {
+                console.log('transaction id', paymentIntent.id)
                 setTransactionId(paymentIntent.id)
+
+
+
+                const payment = {
+                    email: user.email,
+                    price: totalPrice,
+                    transactionId: transactionId,
+                    date: new Date(),
+                    cartIds: cart.map(item => item._id),
+                    menuItemIds: cart.map(item => item.menuId),
+                    status: 'pending'
+                }
+
+
+                const res = await axiosSecure.post('/payments', payment)
+                console.log("payment saved", res.data)
+
+                refetch();
+                if (res.data?.paymentResult?.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Thank you for the taka paisa",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate('/dashboard/paymentHistory')
+                }
             }
         }
 
@@ -103,11 +138,11 @@ const CheckoutForm = () => {
                         },
                     }}
                 />
-                <button className='btn btn-sm btn-primary my-4' type="submit" disabled={!stripe}>
+                <button className='btn btn-sm btn-primary my-4' type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
                 <p className='text-red-700'>{error}</p>
-                {transactionId &&  <p className='text-green-700'>Your Transaction Id : {transactionId}</p>}
+                {transactionId && <p className='text-green-700'>Your Transaction Id : {transactionId}</p>}
 
             </form>
         </div>
